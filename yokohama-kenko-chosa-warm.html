@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>よこはま健康づくり調査 | 研究参加者募集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.pexels.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff8f5;
+      --surface: #ffffff;
+      --accent: #e05a30;
+      --accent-hover: #c04820;
+      --accent-soft: rgba(224, 90, 48, 0.12);
+      --text: #5c2210;
+      --text-muted: #8a5840;
+      --border: rgba(92, 34, 16, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.07rem;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    .hero-wrap {
+      width: 100%;
+      margin: 0 0 1.75rem;
+    }
+
+    .hero {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      background: #8c2818;
+    }
+
+    .hero svg {
+      display: block;
+      width: 100%;
+      height: clamp(220px, 38vw, 360px);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-weight: 400;
+      max-width: 36em;
+      margin: 0 auto;
+    }
+
+    section {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.5rem 1.35rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(92, 34, 16, 0.04);
+    }
+
+    section h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    section h2::before {
+      content: '';
+      width: 4px;
+      height: 1.05em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    section p,
+    section li {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+    }
+
+    section p + p {
+      margin-top: 0.75rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 0 1.1rem;
+    }
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+
+    .cta-wrap {
+      text-align: center;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .btn-participate {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 1rem 2.25rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(224, 90, 48, 0.35);
+    }
+
+    .btn-participate:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-participate:active {
+      transform: scale(0.98);
+    }
+
+    .btn-participate:focus-visible {
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 3px;
+    }
+
+    .btn-note {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    /* ── PDF スライドビューア ── */
+    .pdf-viewer-wrap {
+      margin-top: 0.75rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #2a1a12;
+    }
+
+    #pdf-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .pdf-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0.85rem 1.25rem;
+      background: rgba(0, 0, 0, 0.72);
+    }
+
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.97rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, opacity 0.18s;
+    }
+
+    .pdf-btn:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .pdf-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .pdf-page-info {
+      color: #fff;
+      font-size: 1rem;
+      min-width: 5.5em;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pdf-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    .pdf-fallback {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .pdf-fallback a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contact-box {
+      background: var(--accent-soft);
+      border: 1px solid rgba(224, 90, 48, 0.2);
+    }
+
+    .contact-box p {
+      color: var(--text);
+    }
+
+    .placeholder {
+      color: #b8948a;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    /* ── 研究参加で得られるもの ── */
+    .benefits-section {
+      background: linear-gradient(135deg, #fff0ea 0%, #fff8f3 100%);
+      border: 1.5px solid rgba(224, 90, 48, 0.22);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .benefits-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .benefits-section h2::before {
+      content: '';
+      width: 4px;
+      height: 1.05em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .benefits-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .benefit-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(224, 90, 48, 0.13);
+      box-shadow: 0 2px 6px rgba(224, 90, 48, 0.07);
+    }
+
+    .benefit-number {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      width: 2rem;
+      text-align: center;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .benefit-card p {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .benefit-card .benefit-cond {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-wrap">
+    <figure class="hero">
+      <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="企業の方々と研究チームがつながり、働く人々の健康づくりを一緒に考えるイラスト">
+        <defs>
+          <linearGradient id="hBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#b03a20"/>
+            <stop offset="100%" stop-color="#e87828"/>
+          </linearGradient>
+          <radialGradient id="glowA" cx="50%" cy="65%" r="55%">
+            <stop offset="0%" stop-color="#fde68a" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowB" cx="50%" cy="65%" r="55%">
+            <stop offset="0%" stop-color="#fde68a" stop-opacity="0.24"/>
+            <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowC" cx="50%" cy="65%" r="55%">
+            <stop offset="0%" stop-color="#fde68a" stop-opacity="0.24"/>
+            <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 背景 -->
+        <rect width="720" height="300" fill="url(#hBg)"/>
+
+        <!-- 装飾円（明るめ） -->
+        <circle cx="660" cy="-15" r="210" fill="white" opacity="0.06"/>
+        <circle cx="55"  cy="330" r="175" fill="white" opacity="0.05"/>
+
+        <!-- ドット散点 -->
+        <circle cx="28"  cy="28"  r="2"   fill="white" opacity="0.18"/>
+        <circle cx="62"  cy="70"  r="1.5" fill="white" opacity="0.14"/>
+        <circle cx="42"  cy="128" r="1.5" fill="white" opacity="0.12"/>
+        <circle cx="18"  cy="210" r="2"   fill="white" opacity="0.15"/>
+        <circle cx="88"  cy="258" r="1.5" fill="white" opacity="0.13"/>
+        <circle cx="198" cy="50"  r="1.5" fill="white" opacity="0.14"/>
+        <circle cx="238" cy="262" r="2"   fill="white" opacity="0.11"/>
+        <circle cx="462" cy="38"  r="1.5" fill="white" opacity="0.14"/>
+        <circle cx="484" cy="265" r="2"   fill="white" opacity="0.11"/>
+        <circle cx="576" cy="55"  r="2"   fill="white" opacity="0.14"/>
+        <circle cx="660" cy="130" r="1.5" fill="white" opacity="0.13"/>
+        <circle cx="702" cy="250" r="2"   fill="white" opacity="0.14"/>
+        <circle cx="346" cy="26"  r="1.5" fill="white" opacity="0.13"/>
+
+        <!-- 暖色グロー（各パネル下） -->
+        <ellipse cx="122" cy="210" rx="108" ry="88" fill="url(#glowA)"/>
+        <ellipse cx="360" cy="210" rx="118" ry="92" fill="url(#glowB)"/>
+        <ellipse cx="598" cy="210" rx="108" ry="88" fill="url(#glowC)"/>
+
+        <!-- ======================================================= -->
+        <!-- パネル1：参加企業の方々（3人のチーム）                  -->
+        <!-- ======================================================= -->
+
+        <!-- 人物A（左） head cx=82 cy=168 r=13 -->
+        <circle cx="82" cy="168" r="13" fill="white" opacity="0.86"/>
+        <circle cx="78" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <circle cx="86" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <path d="M79 172 Q82 175.5 85 172" stroke="#a03820" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M69 186 Q82 179 95 186 L97 220 H67 Z" fill="white" opacity="0.72"/>
+
+        <!-- 人物B（中央・やや大きく） head cx=122 cy=158 r=16 -->
+        <circle cx="122" cy="158" r="16" fill="white" opacity="0.96"/>
+        <circle cx="117" cy="157" r="2"  fill="#a03820" opacity="0.5"/>
+        <circle cx="127" cy="157" r="2"  fill="#a03820" opacity="0.5"/>
+        <path d="M118 162.5 Q122 167 126 162.5" stroke="#a03820" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M106 178 Q122 170 138 178 L140 220 H104 Z" fill="white" opacity="0.82"/>
+
+        <!-- 人物C（右） head cx=162 cy=168 r=13 -->
+        <circle cx="162" cy="168" r="13" fill="white" opacity="0.86"/>
+        <circle cx="158" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <circle cx="166" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <path d="M159 172 Q162 175.5 165 172" stroke="#a03820" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M149 186 Q162 179 175 186 L177 220 H147 Z" fill="white" opacity="0.72"/>
+
+        <!-- 3人をつなぐアーク -->
+        <path d="M82 153 Q122 134 162 153" stroke="white" stroke-width="1.6" fill="none" stroke-dasharray="3,3" opacity="0.5"/>
+        <circle cx="82"  cy="153" r="2.8" fill="white" opacity="0.55"/>
+        <circle cx="122" cy="134" r="2.8" fill="white" opacity="0.55"/>
+        <circle cx="162" cy="153" r="2.8" fill="white" opacity="0.55"/>
+
+        <!-- ハート（中央人物の上） -->
+        <path d="M117 124 C117 121 119.5 119.5 122 121.5 C124.5 119.5 127 121 127 124 C127 127 122 131 122 131 C122 131 117 127 117 124 Z" fill="white" opacity="0.62"/>
+
+        <!-- ラベル -->
+        <text x="122" y="268" text-anchor="middle" font-size="12.5" fill="white" opacity="0.9" font-family="'Noto Sans JP',sans-serif" font-weight="700">参加企業の方々</text>
+
+        <!-- ======================================================= -->
+        <!-- 矢印1                                                    -->
+        <!-- ======================================================= -->
+        <path d="M196 176 C220 168 244 163 264 163" stroke="white" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5,4" fill="none"/>
+        <polygon points="262,157 275,163 262,169" fill="white" fill-opacity="0.55"/>
+
+        <!-- ======================================================= -->
+        <!-- パネル2：研究チームとの対話（研究者+2名が向き合う）     -->
+        <!-- ======================================================= -->
+
+        <!-- 背景の柔らかい円（つながりの象徴） -->
+        <circle cx="360" cy="192" r="76" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.22"/>
+
+        <!-- 人物D（左の参加者） head cx=308 cy=172 r=13 -->
+        <circle cx="308" cy="172" r="13" fill="white" opacity="0.84"/>
+        <circle cx="304" cy="171" r="1.8" fill="#a03820" opacity="0.5"/>
+        <circle cx="312" cy="171" r="1.8" fill="#a03820" opacity="0.5"/>
+        <path d="M305 175.5 Q308 179 311 175.5" stroke="#a03820" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M295 190 Q308 183 321 190 L323 220 H293 Z" fill="white" opacity="0.70"/>
+
+        <!-- 人物E（研究者・中央） head cx=360 cy=157 r=16 -->
+        <circle cx="360" cy="157" r="16" fill="white" opacity="0.96"/>
+        <circle cx="355" cy="156" r="2"  fill="#a03820" opacity="0.5"/>
+        <circle cx="365" cy="156" r="2"  fill="#a03820" opacity="0.5"/>
+        <path d="M356 162 Q360 166 364 162" stroke="#a03820" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M344 177 Q360 169 376 177 L378 220 H342 Z" fill="white" opacity="0.82"/>
+        <!-- 研究者の両腕（両側に伸ばす） -->
+        <path d="M344 183 C335 190 325 196 318 197" stroke="white" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.55"/>
+        <path d="M376 183 C385 190 395 196 402 197" stroke="white" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.55"/>
+
+        <!-- 人物F（右の参加者） head cx=412 cy=172 r=13 -->
+        <circle cx="412" cy="172" r="13" fill="white" opacity="0.84"/>
+        <circle cx="408" cy="171" r="1.8" fill="#a03820" opacity="0.5"/>
+        <circle cx="416" cy="171" r="1.8" fill="#a03820" opacity="0.5"/>
+        <path d="M409 175.5 Q412 179 415 175.5" stroke="#a03820" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M399 190 Q412 183 425 190 L427 220 H397 Z" fill="white" opacity="0.70"/>
+
+        <!-- 研究者の頭上にスピーチバブル -->
+        <rect x="340" y="126" width="40" height="22" rx="5" fill="white" opacity="0.28"/>
+        <path d="M357 148 L360 154 L363 148" fill="white" opacity="0.28"/>
+        <rect x="345" y="131" width="30" height="4"   rx="2" fill="white" opacity="0.6"/>
+        <rect x="348" y="138" width="22" height="3.5" rx="1.5" fill="white" opacity="0.45"/>
+
+        <!-- ラベル -->
+        <text x="360" y="268" text-anchor="middle" font-size="12.5" fill="white" opacity="0.9" font-family="'Noto Sans JP',sans-serif" font-weight="700">研究チームとの対話</text>
+
+        <!-- ======================================================= -->
+        <!-- 矢印2                                                    -->
+        <!-- ======================================================= -->
+        <path d="M446 176 C466 168 490 164 512 164" stroke="white" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5,4" fill="none"/>
+        <polygon points="510,158 523,164 510,170" fill="white" fill-opacity="0.55"/>
+
+        <!-- ======================================================= -->
+        <!-- パネル3：施策提案・フィードバック（手渡し・笑顔）       -->
+        <!-- ======================================================= -->
+
+        <!-- 人物G（アドバイザー・左） head cx=564 cy=168 r=13 -->
+        <circle cx="564" cy="168" r="13" fill="white" opacity="0.84"/>
+        <circle cx="560" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <circle cx="568" cy="167" r="1.8" fill="#a03820" opacity="0.5"/>
+        <path d="M561 172 Q564 175.5 567 172" stroke="#a03820" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M551 186 Q564 179 577 186 L579 220 H549 Z" fill="white" opacity="0.70"/>
+        <!-- 右腕（手渡し） -->
+        <path d="M577 192 C586 196 592 198 600 198" stroke="white" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+        <!-- 手渡しドキュメント（中央） -->
+        <rect x="592" y="186" width="26" height="32" rx="3" fill="white" opacity="0.72"/>
+        <rect x="596" y="191" width="18" height="3"   rx="1.5" fill="#a03820" opacity="0.45"/>
+        <rect x="596" y="196.5" width="14" height="2.5" rx="1.2" fill="#a03820" opacity="0.35"/>
+        <rect x="596" y="201.5" width="16" height="2.5" rx="1.2" fill="#a03820" opacity="0.35"/>
+        <rect x="596" y="206.5" width="11" height="2.5" rx="1.2" fill="#a03820" opacity="0.3"/>
+        <!-- チェックマーク on doc -->
+        <circle cx="605" cy="212" r="5" fill="#a03820" opacity="0.35"/>
+        <path d="M602.5 212 l2 2 4-4" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- 人物H（受け取る側・右） head cx=638 cy=162 r=14 -->
+        <circle cx="638" cy="162" r="14" fill="white" opacity="0.93"/>
+        <circle cx="634" cy="161" r="2"  fill="#a03820" opacity="0.5"/>
+        <circle cx="642" cy="161" r="2"  fill="#a03820" opacity="0.5"/>
+        <path d="M635 166 Q638 170 641 166" stroke="#a03820" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M624 180 Q638 172 652 180 L654 220 H622 Z" fill="white" opacity="0.78"/>
+        <!-- 左腕（受け取り） -->
+        <path d="M624 186 C617 192 612 197 605 199" stroke="white" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+        <!-- 受け取り人の上に電球（ひらめき・成果） -->
+        <circle cx="638" cy="134" r="11" fill="white" opacity="0.8"/>
+        <rect x="634" y="144" width="8"  height="6"  rx="1.5" fill="white" opacity="0.65"/>
+        <rect x="635" y="149" width="6"  height="3"  rx="1" fill="white" opacity="0.5"/>
+        <!-- 光の線 -->
+        <line x1="638" y1="118" x2="638" y2="114" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <line x1="651" y1="123" x2="654" y2="119" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <line x1="625" y1="123" x2="622" y2="119" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <line x1="655" y1="134" x2="660" y2="134" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="621" y1="134" x2="616" y2="134" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <!-- 電球の中の輝き -->
+        <circle cx="636" cy="131" r="3.5" fill="#a03820" opacity="0.25"/>
+
+        <!-- ラベル -->
+        <text x="600" y="268" text-anchor="middle" font-size="12.5" fill="white" opacity="0.9" font-family="'Noto Sans JP',sans-serif" font-weight="700">施策提案・フィードバック</text>
+
+        <!-- 底部ウェーブ -->
+        <path d="M0 287 Q180 278 360 284 Q540 290 720 280 L720 300 H0 Z" fill="white" opacity="0.05"/>
+      </svg>
+    </figure>
+  </div>
+
+  <div class="container">
+    <header>
+      <p class="badge">研究参加者募集</p>
+      <h1>よこはま健康づくり調査</h1>
+      <p class="lead">人事・経営層の方へ。職場環境と健康の関わりを明らかにする調査です。<br>ご参加いただいた企業には、データ分析に基づく施策提案をお返しします。</p>
+    </header>
+
+    <section>
+      <h2>研究目的</h2>
+      <p>
+        働く人々のからだ・こころ・職場でのつながりをより良いものにしていくために、企業に何ができるかを明らかにすることを目的としています。「どんな職場環境が、どんな健康につながるか」を科学的に解明し、得られた知見を職場での具体的な健康づくりに役立てることをめざしています。
+      </p>
+    </section>
+
+    <section>
+      <h2>研究対象者</h2>
+      <p>次の方を対象としています。</p>
+      <ul>
+        <li>企業の人事労務担当者</li>
+        <li>企業の役員・経営層</li>
+        <li>その他企業版のアンケートに回答して頂ける方</li>
+      </ul>
+      <p style="margin-top: 0.85rem; font-size: 0.88rem;">
+        ※対象範囲や参加条件の詳細は、研究説明書（PDF）およびアンケート開始時の説明をご確認ください。
+      </p>
+    </section>
+
+    <!-- 研究参加で得られるもの -->
+    <section class="benefits-section">
+      <h2>研究参加で得られるもの</h2>
+      <div class="benefits-grid">
+
+        <!-- カード1：施策オプション -->
+        <div class="benefit-card">
+          <span class="benefit-number">1</span>
+          <svg class="benefit-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="24" fill="#fff0ea"/>
+            <path d="M24 12c-4.42 0-8 3.58-8 8 0 3.1 1.77 5.8 4.36 7.17L21 32h6l.64-4.83C30.23 25.8 32 23.1 32 20c0-4.42-3.58-8-8-8z" fill="#e05a30" opacity=".25"/>
+            <path d="M24 13c-3.87 0-7 3.13-7 7 0 2.72 1.55 5.09 3.82 6.29L21.5 31h5l.68-4.71C29.45 25.09 31 22.72 31 20c0-3.87-3.13-7-7-7z" fill="#e05a30" opacity=".55"/>
+            <rect x="21" y="31" width="6" height="1.5" rx="0.75" fill="#e05a30"/>
+            <rect x="22" y="33.5" width="4" height="1.5" rx="0.75" fill="#e05a30"/>
+            <circle cx="24" cy="20" r="2.5" fill="#fff"/>
+            <rect x="15" y="37" width="5" height="1.4" rx="0.7" fill="#e05a30" opacity=".4"/>
+            <rect x="21.5" y="37" width="5" height="1.4" rx="0.7" fill="#e05a30" opacity=".65"/>
+            <rect x="28" y="37" width="5" height="1.4" rx="0.7" fill="#e05a30" opacity=".9"/>
+          </svg>
+          <p>あなたの企業で取り組める<strong>施策オプションを３つ</strong>ご共有します</p>
+        </div>
+
+        <!-- カード2：他社比較 -->
+        <div class="benefit-card">
+          <span class="benefit-number">2</span>
+          <svg class="benefit-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="24" fill="#fff0ea"/>
+            <rect x="11" y="28" width="6" height="10" rx="2" fill="#e05a30" opacity=".35"/>
+            <rect x="21" y="21" width="6" height="17" rx="2" fill="#e05a30" opacity=".6"/>
+            <rect x="31" y="15" width="6" height="23" rx="2" fill="#e05a30"/>
+            <path d="M14 27l10-8 10-6" stroke="#e05a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="27" r="2" fill="#fff" stroke="#e05a30" stroke-width="1.5"/>
+            <circle cx="24" cy="19" r="2" fill="#fff" stroke="#e05a30" stroke-width="1.5"/>
+            <circle cx="34" cy="13" r="2" fill="#fff" stroke="#e05a30" stroke-width="1.5"/>
+          </svg>
+          <p>他の企業と比較して、<strong>より強化したほうが良い部分</strong>を提示します</p>
+        </div>
+
+        <!-- カード3：エビデンス情報 -->
+        <div class="benefit-card">
+          <span class="benefit-number">3</span>
+          <svg class="benefit-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="24" fill="#fff0ea"/>
+            <rect x="13" y="11" width="22" height="28" rx="3" fill="#e05a30" opacity=".2"/>
+            <rect x="15" y="13" width="18" height="24" rx="2" fill="#fff"/>
+            <rect x="18" y="18" width="12" height="1.5" rx="0.75" fill="#e05a30" opacity=".5"/>
+            <rect x="18" y="21.5" width="12" height="1.5" rx="0.75" fill="#e05a30" opacity=".5"/>
+            <rect x="18" y="25" width="8" height="1.5" rx="0.75" fill="#e05a30" opacity=".5"/>
+            <circle cx="30" cy="30" r="5" fill="#e05a30"/>
+            <path d="M28.5 30l1.2 1.2 2.3-2.4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p><strong>エビデンスに基づいた</strong>労働者の健康づくりにまつわる役立つ情報をご提供します</p>
+        </div>
+
+        <!-- カード4：研究者に相談 -->
+        <div class="benefit-card">
+          <span class="benefit-number">4</span>
+          <svg class="benefit-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="24" fill="#fff0ea"/>
+            <circle cx="19" cy="18" r="5" fill="#e05a30" opacity=".35"/>
+            <path d="M11 33c0-4.42 3.58-8 8-8s8 3.58 8 8" fill="#e05a30" opacity=".35"/>
+            <circle cx="31" cy="16" r="4" fill="#e05a30" opacity=".7"/>
+            <path d="M24 30c0-3.87 3.13-7 7-7s7 3.13 7 7" fill="#e05a30" opacity=".7"/>
+            <path d="M26 22.5c.5-.3 1.05-.5 1.6-.5" stroke="#e05a30" stroke-width="1.3" stroke-linecap="round"/>
+            <rect x="17" y="11" width="14" height="9" rx="3" fill="#e05a30"/>
+            <path d="M20 20v3l3-3" fill="#e05a30"/>
+            <rect x="19.5" y="13.5" width="9" height="1.2" rx="0.6" fill="#fff" opacity=".85"/>
+            <rect x="19.5" y="16" width="6" height="1.2" rx="0.6" fill="#fff" opacity=".6"/>
+          </svg>
+          <div>
+            <span class="benefit-cond">条件を満たすと</span>
+            <p>今後の取り組みについて、<strong>健康づくりを専門とする研究者と相談</strong>できます</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>研究実施機関</h2>
+      <p><strong style="color: var(--text);">横浜市立大学</strong>（研究代表・実施の中心）</p>
+      <p style="margin-top: 0.65rem;">本研究は、次の機関との連携・協力のもとで進めています。</p>
+      <ul>
+        <li>横浜市</li>
+        <li>協会けんぽ神奈川支部</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>研究説明書</h2>
+      <p>研究計画に基づき、専門用語をできるだけやわらかくまとめた説明です。背景・ねらい・調べ方のイメージは以下のスライドをご覧ください（個人情報の取り扱いや同意については、別途お渡しする書面をご確認ください）。</p>
+      <div class="pdf-viewer-wrap">
+        <div id="pdf-loading" class="pdf-loading">スライドを読み込み中…</div>
+        <canvas id="pdf-canvas" style="display:none"></canvas>
+        <div class="pdf-nav">
+          <button class="pdf-btn" id="pdf-prev" disabled>◀ 前のスライド</button>
+          <span class="pdf-page-info" id="pdf-page-info">— / —</span>
+          <button class="pdf-btn" id="pdf-next" disabled>次のスライド ▶</button>
+        </div>
+      </div>
+      <p class="pdf-fallback">
+        スライドが表示されない場合は、<a href="kenkyu_setusmei_2.pdf" download>こちらからダウンロード</a>してください。
+      </p>
+    </section>
+
+    <div class="cta-wrap">
+      <!-- 同意ページ経由でアンケートへ進みます。アンケートURLは yokohama-kenko-consent.html 内の SURVEY_URL も合わせて変更してください -->
+      <a class="btn-participate" href="yokohama-kenko-consent.html">
+        研究に参加する
+      </a>
+      <p class="btn-note">次の画面で同意事項の確認とチェックをお願いします。</p>
+    </div>
+
+    <section class="contact-box">
+      <h2>問い合わせ先</h2>
+      <p>
+        横浜市立大学　<span class="placeholder">○○研究室（研究責任者：○○ ○○）</span><br>
+        メール：<span class="placeholder">（メールアドレスを記載）</span><br>
+        電話：<span class="placeholder">（電話番号・受付時間を記載）</span>
+      </p>
+    </section>
+
+    <footer>
+      © よこはま健康づくり調査
+    </footer>
+  </div>
+  <!-- PDF.js スライドビューア -->
+  <script src="pdf.min.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    const PDF_URL    = 'kenkyu_setusmei_2.pdf';
+    const WORKER_URL = 'pdf.worker.min.js';
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_URL;
+
+    var pdfDoc      = null;
+    var pageNum     = 1;
+    var rendering   = false;
+    var pendingPage = null;
+
+    var canvas   = document.getElementById('pdf-canvas');
+    var ctx      = canvas.getContext('2d');
+    var loading  = document.getElementById('pdf-loading');
+    var prevBtn  = document.getElementById('pdf-prev');
+    var nextBtn  = document.getElementById('pdf-next');
+    var pageInfo = document.getElementById('pdf-page-info');
+
+    function updateButtons() {
+      prevBtn.disabled = pageNum <= 1;
+      nextBtn.disabled = pageNum >= pdfDoc.numPages;
+      pageInfo.textContent = pageNum + ' / ' + pdfDoc.numPages;
+    }
+
+    function doRender(num) {
+      rendering = true;
+      pdfDoc.getPage(num).then(function (page) {
+        var containerW = canvas.parentElement.clientWidth || 900;
+        var vp1        = page.getViewport({ scale: 1 });
+        var dpr        = window.devicePixelRatio || 1;
+        var cssScale   = containerW / vp1.width;
+        var vp         = page.getViewport({ scale: cssScale * dpr });
+
+        canvas.width        = vp.width;
+        canvas.height       = vp.height;
+        canvas.style.width  = containerW + 'px';
+        canvas.style.height = Math.floor(vp1.height * cssScale) + 'px';
+
+        page.render({ canvasContext: ctx, viewport: vp }).promise.then(function () {
+          rendering = false;
+          if (pendingPage !== null) {
+            var p = pendingPage;
+            pendingPage = null;
+            doRender(p);
+          }
+        });
+      });
+    }
+
+    function goToPage(num) {
+      if (rendering) {
+        pendingPage = num;
+        return;
+      }
+      pageNum = num;
+      updateButtons();
+      doRender(num);
+    }
+
+    pdfjsLib.getDocument(PDF_URL).promise.then(function (pdf) {
+      pdfDoc = pdf;
+      loading.style.display = 'none';
+      canvas.style.display  = 'block';
+      updateButtons();
+      doRender(1);
+    }).catch(function (err) {
+      loading.textContent = 'スライドを読み込めませんでした。下のリンクからダウンロードしてご覧ください。';
+      console.error(err);
+    });
+
+    prevBtn.addEventListener('click', function () {
+      if (pageNum <= 1) return;
+      goToPage(pageNum - 1);
+    });
+
+    nextBtn.addEventListener('click', function () {
+      if (!pdfDoc || pageNum >= pdfDoc.numPages) return;
+      goToPage(pageNum + 1);
+    });
+  })();
+  </script>
+</body>
+</html>
