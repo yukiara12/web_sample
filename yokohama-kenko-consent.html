@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研究参加の同意 | よこはま健康づくり調査</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0f7f5;
+      --surface: #ffffff;
+      --accent: #0f766e;
+      --accent-hover: #0d9488;
+      --accent-soft: rgba(15, 118, 110, 0.12);
+      --text: #134e4a;
+      --text-muted: #5f7a76;
+      --border: rgba(19, 78, 74, 0.1);
+      --danger: #b91c1c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.125rem;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .back {
+      margin-bottom: 1.25rem;
+    }
+
+    .back a {
+      color: var(--accent);
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+
+    .back a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 4vw, 1.85rem);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    section {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.5rem 1.35rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    section h2::before {
+      content: '';
+      width: 4px;
+      height: 1.05em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .consent-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .consent-list li {
+      position: relative;
+      padding-left: 1.35rem;
+      margin-bottom: 0.85rem;
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .consent-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .consent-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.75;
+    }
+
+    .note {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .agree-box {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.35rem 1.25rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-row input {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-top: 0.4rem;
+      flex-shrink: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .checkbox-row span {
+      font-size: 1.08rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .cta-wrap {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-agree {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.05rem 2.4rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+      box-shadow: 0 2px 8px rgba(15, 118, 110, 0.35);
+    }
+
+    .btn-agree:enabled {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-agree:enabled:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-agree:enabled:active {
+      transform: scale(0.98);
+    }
+
+    .btn-agree:disabled {
+      background: #94a3a8;
+      color: #f1f5f9;
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.85;
+    }
+
+    .btn-agree:focus-visible {
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 3px;
+    }
+
+    .btn-hint {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="back"><a href="yokohama-kenko-chosa.html">← 募集ページに戻る</a></p>
+
+    <header>
+      <p class="badge">ご参加前のご案内</p>
+      <h1>研究参加にあたってのご確認（同意事項）</h1>
+      <p class="lead">よこはま健康づくり調査</p>
+    </header>
+
+    <section>
+      <h2>ご確認ください（一般的な研究参加の同意事項）</h2>
+      <ul class="consent-list">
+        <li>本研究の目的と内容につきましては、募集ページのご案内および研究説明書（PDF）をご覧いただき、ご自身のご判断でご参加をお決めいただけます。</li>
+        <li>ご参加は<strong style="color: var(--text); font-weight: 600;">任意</strong>でございます。同意されない場合でも、勤務・評価・待遇などに不利益が生じることはございません。</li>
+        <li>一度ご同意いただいた後でも、<strong style="color: var(--text); font-weight: 600;">いつでも理由を問わずご参加を取りやめ</strong>いただけます。その場合も不利益はございません。</li>
+        <li>お答えいただいた内容は研究目的の範囲内でのみ利用し、丁寧に管理いたします。公表（論文・学会報告など）の際には、個人が特定されないよう匿名化・統計処理などの工夫をいたします。</li>
+        <li>研究の内容や個人情報の取り扱いについてご不安がございましたら、<strong style="color: var(--text); font-weight: 600;">ご参加の前に研究担当者までお気軽にお問い合わせ</strong>ください。ご納得のうえでご参加いただければ幸いです。</li>
+        <li>本ページの文言は一般的なご説明用のたたき台です。<strong style="color: var(--text); font-weight: 600;">倫理審査で承認された同意文書・説明文書がある場合は、そちらを優先</strong>いただき、必要に応じて本ページの文面を差し替えてください。</li>
+        <li>回答いただいた個人情報を含むすべての内容は、登録された大学の研究者のみが取り扱います。企業や行政を始めとして大学の外に持ち出されて使用されることも、研究者以外の誰かに見られることも決してありません。また、データは研究目的にのみ使用し、それ以外の目的に使用されることも決してありません。</li>
+      </ul>
+      <p class="note">研究説明書（PDF）は<a href="kenkyu_setusmei_2.pdf" target="_blank" rel="noopener noreferrer">こちら</a>からご覧いただけます（募集ページからも同じ資料をご案内しております）。</p>
+    </section>
+
+    <div class="agree-box">
+      <label class="checkbox-row" for="consent-agree">
+        <input type="checkbox" id="consent-agree" name="consent" autocomplete="off">
+        <span>上記をお読みいただき、内容をご理解いただいたうえで、研究参加にご同意いただく旨を確認します。</span>
+      </label>
+    </div>
+
+    <div class="cta-wrap">
+      <!-- アンケートURLは下の SURVEY_URL と合わせて差し替えてください -->
+      <button type="button" class="btn-agree" id="btn-consent-submit" disabled>
+        研究参加に同意
+      </button>
+      <p class="btn-hint">チェックを入れていただくとボタンが有効になります。クリック後、別ウィンドウでアンケートが開きます。</p>
+    </div>
+
+    <footer>
+      © よこはま健康づくり調査
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      // 実際のフォームURLに書き換えてください（募集ページのボタンと同じURL）
+      var SURVEY_URL = 'https://example.com/survey';
+
+      var cb = document.getElementById('consent-agree');
+      var btn = document.getElementById('btn-consent-submit');
+
+      function sync() {
+        btn.disabled = !cb.checked;
+      }
+
+      cb.addEventListener('change', sync);
+      sync();
+
+      btn.addEventListener('click', function () {
+        if (!cb.checked) return;
+        window.open(SURVEY_URL, '_blank', 'noopener,noreferrer');
+      });
+    })();
+  </script>
+</body>
+</html>
