@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f0f7f5;
+      --bg: #fff8f5;
       --surface: #ffffff;
-      --accent: #0f766e;
-      --accent-hover: #0d9488;
-      --accent-soft: rgba(15, 118, 110, 0.12);
-      --text: #134e4a;
-      --text-muted: #5f7a76;
-      --border: rgba(19, 78, 74, 0.1);
+      --accent: #e05a30;
+      --accent-hover: #c04820;
+      --accent-soft: rgba(224, 90, 48, 0.12);
+      --text: #5c2210;
+      --text-muted: #8a5840;
+      --border: rgba(92, 34, 16, 0.1);
       --danger: #b91c1c;
     }
 
@@ -90,6 +90,7 @@
       padding: 1.5rem 1.35rem;
       margin-bottom: 1.25rem;
       border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(92, 34, 16, 0.04);
     }
 
     section h2 {
@@ -150,12 +151,22 @@
       border-top: 1px dashed var(--border);
     }
 
+    .note a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .note a:hover {
+      color: var(--accent-hover);
+    }
+
     .agree-box {
       background: var(--surface);
       border-radius: 12px;
       padding: 1.35rem 1.25rem;
       margin-bottom: 1.5rem;
       border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(92, 34, 16, 0.04);
     }
 
     .checkbox-row {
@@ -198,7 +209,7 @@
       border: none;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, opacity 0.2s;
-      box-shadow: 0 2px 8px rgba(15, 118, 110, 0.35);
+      box-shadow: 0 2px 8px rgba(224, 90, 48, 0.35);
     }
 
     .btn-agree:enabled {
@@ -215,8 +226,8 @@
     }
 
     .btn-agree:disabled {
-      background: #94a3a8;
-      color: #f1f5f9;
+      background: #b8a099;
+      color: #faf6f3;
       cursor: not-allowed;
       box-shadow: none;
       opacity: 0.85;
@@ -242,7 +253,7 @@
 </head>
 <body>
   <div class="container">
-    <p class="back"><a href="yokohama-kenko-chosa.html">← 募集ページに戻る</a></p>
+    <p class="back"><a href="yokohama-kenko-chosa-warm.html">← 募集ページに戻る</a></p>
 
     <header>
       <p class="badge">ご参加前のご案内</p>
