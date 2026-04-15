@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+.env
+.env.*
+
+# ── GitHub に上げないファイル（このリポジトリ用）──
+
+# 社内・計画系 PDF（容量・公開範囲の都合でリポジトリ外）
+R8_kaken_plan.pdf
+
+# 研究説明書の別版・生成物（公開用は kenkyu_setusmei_2.pdf をコミット済みで管理）
+kenkyu_setusmei_3.pdf
+kenkyu_setsumei_heiyi.pdf
+
+# 研究説明 PDF 用のローカル生成スクリプト
+build_setsumei_pdf.py
+
+# 作業用データ（Excel 等を置くフォルダ）
+qq/
