@@ -1,0 +1,6 @@
+node_modules/
+package-lock.json
+
+# 生成物とQA用の中間ファイル（build_deck.js から再生成できる）
+build/
+.fonts/
